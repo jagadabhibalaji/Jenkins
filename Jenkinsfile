@@ -5,7 +5,7 @@ pipeline{
         timestamps()
     }
     environment{
-        registry = "jagadabhibalaji/Jenkins"
+        registry = "jagadabhibalaji/jenkins"
         registryCredential = 'jagadabhibalaji/Balu@3303(docker.id)'
     }
     stages{
