@@ -5,27 +5,25 @@ pipeline{
         timestamps()
     }
     environment{
-
         registry = "jagadabhibalaji/Jenkins"
         registryCredential = 'jagadabhibalaji/Balu@3303(docker.id)'
     }
-
     stages{
-       stage('Building image') {
-      steps{
-        script {
-          dockerImage = docker.build registry + ":$BUILD_NUMBER"
+        stage('Building image') {
+            steps {
+                script {
+                    dockerImage = docker.build registry + ":$BUILD_NUMBER"
+                }
+            }
         }
-      }
-    }
-  }
-       stage('Deploy Image') {
-      steps{
-         script {
-            docker.withRegistry( '', registryCredential ) {
-            dockerImage.push()
-          }
+        stage('Deploy Image') {
+            steps {
+                script {
+                    docker.withRegistry('', registryCredential) {
+                        dockerImage.push()
+                    }
+                }
+            }
         }
-      }
     }
 }
