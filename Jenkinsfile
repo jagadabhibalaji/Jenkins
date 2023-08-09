@@ -6,7 +6,7 @@ pipeline{
     }
     environment{
         registry = "jagadabhibalaji/jenkins"
-        registryCredential = 'jagadabhibalaji/image1'
+        registryCredential = 'd2178b8a-9560-487b-a87f-41cd89a90082'
     }
     stages{
         stage('Building image') {
@@ -18,9 +18,11 @@ pipeline{
         }
         stage('Deploy Image') {
             steps {
-                script {
-                    docker.withRegistry('', registryCredential) {
-                        dockerImage.push()
+                withCredentials([usernamePassword(credentialsId:'d2178b8a-9560-487b-a87f-41cd89a90082', usernameVariable: 'jagadabhibalaji', passwordVariable: 'Balu@3303')]) {
+                    script {
+                        docker.withRegistry('', DOCKER_USERNAME, DOCKER_PASSWORD) {
+                            dockerImage.push()
+                        }
                     }
                 }
             }
