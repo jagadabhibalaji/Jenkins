@@ -6,8 +6,8 @@ pipeline{
     }
     environment{
 
-        registry = "<dockerhub-username>/<repo-name>"
-        registryCredential = '<dockerhub-credential-name>'
+        registry = "jagadabhibalaji/Jenkins"
+        registryCredential = 'jagadabhibalaji/Balu@3303(docker.id)'
     }
 
     stages{
@@ -18,6 +18,7 @@ pipeline{
         }
       }
     }
+  }
        stage('Deploy Image') {
       steps{
          script {
