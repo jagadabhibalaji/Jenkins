@@ -6,7 +6,7 @@ pipeline{
     }
     environment{
         registry = "jagadabhibalaji/jenkins"
-        registryCredential = 'jagadabhibalaji/Balu@3303(docker.id)'
+        registryCredential = 'jagadabhibalaji/image1'
     }
     stages{
         stage('Building image') {
