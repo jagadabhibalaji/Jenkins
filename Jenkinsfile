@@ -66,7 +66,7 @@ pipeline {
             steps {
                 script {
                     def dockerImage = docker.image("${DOCKER_IMAGE_NAME}:${BUILD_NUMBER}")
-                    dockerImage.outside('-w ' + pwd()) {
+                    dockerImage.run('-w ' + pwd()) {
                         sh 'npm install' // Install any required dependencies
                         sh 'npm run build' // Build your project (replace with your build command)
                         sh 'npm start' // Start your application (replace with your start command)
