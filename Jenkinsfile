@@ -18,16 +18,27 @@ pipeline{
                 }
             }
         }
+        // stage('Deploy Image') {
+        //     steps {
+        //         withCredentials([usernamePassword(credentialsId:registryCredential, usernameVariable: DOCKER_USERNAME, passwordVariable: DOCKER_PASSWORD)]) {
+        //             script {
+        //                 docker.withRegistry('', DOCKER_USERNAME, DOCKER_PASSWORD) {
+        //                     dockerImage.push()
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
         stage('Deploy Image') {
             steps {
-                withCredentials([usernamePassword(credentialsId:registryCredential, usernameVariable: DOCKER_USERNAME, passwordVariable: DOCKER_PASSWORD)]) {
-                    script {
-                        docker.withRegistry('', DOCKER_USERNAME, DOCKER_PASSWORD) {
-                            dockerImage.push()
-                        }
-                    }
+            script {
+                def dockerRegistry = docker.createRegistry()
+                docker.withRegistry("${registry}", "${DOCKER_USERNAME}", "${DOCKER_PASSWORD}") {
+                    dockerImage.push()
                 }
             }
-        }
-    }
+         }
+      }
+
+   }
 }
