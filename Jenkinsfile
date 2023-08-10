@@ -5,7 +5,7 @@
 //         timestamps()
 //     }
 //     environment{
-//         registry = "jagadabhibalaji/C:/Users/JagadabhiBalaji-3303/.jenkins/workspace/mydocker/jenkins"
+//         registry = "jagadabhibalaji/jenkins"
 //         registryCredential = 'd2178b8a-9560-487b-a87f-41cd89a90082'
 //         DOCKER_USERNAME = 'jagadabhibalaji'
 //         DOCKER_PASSWORD = 'Balu@3303'
@@ -73,7 +73,7 @@ pipeline {
     }
 }
 def runDockerContainer(dockerImage) {
-    dockerImage.inside('-w /workspace') {
+    dockerImage.inside('-w /C:/Users/JagadabhiBalaji-3303/.jenkins/workspace/mydocker') {
         sh 'npm install' // Install any required dependencies
         sh 'npm run build' // Build your project (replace with your build command)
         sh 'npm start' // Start your application (replace with your start command)
