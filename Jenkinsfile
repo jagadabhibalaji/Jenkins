@@ -65,8 +65,10 @@ pipeline {
             steps {
                 script {
                     def dockerImage = docker.image("${DOCKER_IMAGE_NAME}:${env.BUILD_NUMBER}")
-                    dockerImage.inside {
-                        sh 'echo "Running commands inside the Docker container"'
+                    dockerImage.inside('-w /workspace') {
+                        sh 'npm install' // Install any required dependencies
+                        sh 'npm run build' // Build your project 
+                        sh 'npm start' // Start your application 
                     }
                 }
             }
