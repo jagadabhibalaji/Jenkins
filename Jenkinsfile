@@ -37,7 +37,7 @@ pipeline {
     agent any
     
     environment {
-        DOCKER_REGISTRY = "docker.io"
+        DOCKER_REGISTRY = "https://index.docker.io/v1/"
         DOCKER_IMAGE_NAME = "jagadabhibalaji/jenkins"
     }
     
@@ -62,3 +62,4 @@ pipeline {
         }
     }
 }
+
