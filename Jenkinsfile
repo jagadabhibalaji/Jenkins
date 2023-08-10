@@ -5,7 +5,7 @@
 //         timestamps()
 //     }
 //     environment{
-//         registry = "jagadabhibalaji/jenkins"
+//         registry = "jagadabhibalaji/C:/Users/JagadabhiBalaji-3303/.jenkins/workspace/mydocker/jenkins"
 //         registryCredential = 'd2178b8a-9560-487b-a87f-41cd89a90082'
 //         DOCKER_USERNAME = 'jagadabhibalaji'
 //         DOCKER_PASSWORD = 'Balu@3303'
