@@ -50,7 +50,7 @@ pipeline {
             }
         }
         
-        stage('Push Image') {
+        stage('Deploy Image') {
             steps {
                 script {
                     docker.withRegistry("${DOCKER_REGISTRY}", "d2178b8a-9560-487b-a87f-41cd89a90082") {
