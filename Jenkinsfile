@@ -29,16 +29,20 @@ pipeline{
         //         }
         //     }
         // }
+        def registryCredential = 'docker-credentials-id'
+        def dockerImage = "jagadabhibalaji/jenkins:$BUILD_NUMBER"
+        
         stage('Deploy Image') {
             steps {
-            script {
-                def dockerRegistry = docker.createRegistry()
-                docker.withRegistry("${registry}", "${DOCKER_USERNAME}", "${DOCKER_PASSWORD}") {
-                    dockerImage.push()
+                script {
+                    def registryUrl = 'https://index.docker.io/v1/'
+                    def docker = Docker.image(registryUrl)
+                    def image = docker.image(dockerImage)
+                    docker.withRegistry('', registryCredential) {
+                        image.push()
+                    }
                 }
             }
-         }
-      }
-
+        }
    }
 }
