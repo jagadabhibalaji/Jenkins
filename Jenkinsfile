@@ -39,6 +39,7 @@ pipeline {
     environment {
         DOCKER_REGISTRY = "https://index.docker.io/v1/"
         DOCKER_IMAGE_NAME = "jagadabhibalaji/jenkins"
+        WORKSPACE_PATH = pwd()
     }
 
     stages {
@@ -64,8 +65,8 @@ pipeline {
         stage('Run Image') {
             steps {
                 script {
-                    def dockerImage = docker.image("${DOCKER_IMAGE_NAME}:${env.BUILD_NUMBER}")
-                    dockerImage.inside('-w /workspace') {
+                    def dockerImage = docker.image("${DOCKER_IMAGE_NAME}:${BUILD_NUMBER}")
+                    dockerImage.inside("-w ${WORKSPACE_PATH}") {
                         sh 'npm install' // Install any required dependencies
                         sh 'npm run build' // Build your project 
                         sh 'npm start' // Start your application 
