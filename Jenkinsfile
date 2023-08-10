@@ -35,12 +35,12 @@
 
 pipeline {
     agent any
-    
+
     environment {
         DOCKER_REGISTRY = "https://index.docker.io/v1/"
         DOCKER_IMAGE_NAME = "jagadabhibalaji/jenkins"
     }
-    
+
     stages {
         stage('Build Image') {
             steps {
@@ -49,7 +49,7 @@ pipeline {
                 }
             }
         }
-        
+
         stage('Deploy Image') {
             steps {
                 script {
@@ -60,6 +60,18 @@ pipeline {
                 }
             }
         }
+
+        stage('Run Image') {
+            steps {
+                script {
+                    def dockerImage = docker.image("${DOCKER_IMAGE_NAME}:${env.BUILD_NUMBER}")
+                    dockerImage.inside {
+                        sh 'echo "Running commands inside the Docker container"'
+                    }
+                }
+            }
+        }
     }
 }
+
 
