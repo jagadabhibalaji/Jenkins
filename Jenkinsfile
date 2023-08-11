@@ -88,4 +88,4 @@ pipeline {
 //         sh 'npm run build' // Build your project (replace with your build command)
 //         sh 'npm start' // Start your application (replace with your start command)
 //     }
-}
+// }
