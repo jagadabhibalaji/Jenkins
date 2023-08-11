@@ -1,41 +1,44 @@
 pipeline {
-    agent any 
-    environment {
-        registry = "jagadabhibalaji/jenkins1"
-        registryCredential = 'd2178b8a-9560-487b-a87f-41cd89a90082'
-        dockerImage = ''
-    }
-    
-    stages {
-        stage('Cloning Git') {
-            steps {
-                checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '', url: 'https://github.com/jagadabhibalaji/jenkins.git']]])       
-            }
-        }
-    stage('Building image') {
-      steps{
-        script {
-          dockerImage = docker.build registry
-        }
-      }
-    }
-    stage('Upload Image') {
-     steps{    
-         script {
-            docker.withRegistry( '', registryCredential ) {
-            dockerImage.push()
-            }
-        }
-      }  
-    }
-    stage('Docker Run') {
-        steps{
-            script {
-                bat "docker run %registry%"
-            }
-        }
-    }
-  }
+    agent any
+    environment {
+        registry = "jagadabhibalaji/jenkins1"
+        registryCredential = 'd2178b8a-9560-487b-a87f-41cd89a90082'
+        dockerImage = ''
+    }
+    
+    stages {
+        stage('Cloning Git') {
+            steps {
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '', url: 'https://github.com/jagadabhibalaji/jenkins.git']]])
+            }
+        }
+        
+        stage('Building image') {
+            steps {
+                script {
+                    dockerImage = docker.build registry
+                }
+            }
+        }
+        
+        stage('Upload Image') {
+            steps {     
+                script {
+                    docker.withRegistry('', registryCredential) {
+                        dockerImage.push()
+                    }
+                }
+            }  
+        }
+        
+        stage('Docker Run') {
+            steps {
+                script {
+                    bat "docker run %registry%"
+                }
+            }
+        }
+    }
 }
 
 
